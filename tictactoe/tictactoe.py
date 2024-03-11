@@ -109,15 +109,29 @@ def winner(board):
 def terminal(board):
     """
     Returns True if game is over, False otherwise.
+    The game is over if there is a winner or if all the slots on the beard are filled
     """
-    raise NotImplementedError
+    #if there is a winner or all cells for each row are not empty return true else return false
+    winner = winner(board)
+    if winner or all(all(cell != EMPTY for cell in row) for row in board):
+        return True
+    else:
+        return False
 
 
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
+    If X has won the game, the utility is 1. If O has won the game, the utility is -1. If the game has ended in a tie, the utility is 0.
+    You may assume utility will only be called on a board if terminal(board) is True.
     """
-    raise NotImplementedError
+    winner = winner(board)
+    if winner == X:
+        return 1
+    elif winner == O:
+        return -1
+    else:
+        return 0
 
 
 def minimax(board):
@@ -125,3 +139,4 @@ def minimax(board):
     Returns the optimal action for the current player on the board.
     """
     raise NotImplementedError
+
